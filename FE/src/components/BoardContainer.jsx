@@ -6,7 +6,7 @@ const BoardContainer = () => {
     const canvasRef = useRef(null);
     const { color, size } = useContext(DataContext);
 
-    const socket = io('http://localhost:3000'); // Adjust the URL as needed
+    const socket = io('http://localhost:3001');
 
     useEffect(() => {
         const emitCanvasData = () => {
