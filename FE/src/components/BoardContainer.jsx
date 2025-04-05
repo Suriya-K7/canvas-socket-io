@@ -7,9 +7,9 @@ const BoardContainer = () => {
     const { color, size } = useContext(DataContext);
 
     const socket = io('http://localhost:3001');
-    const canvas = canvasRef.current;
 
     useEffect(() => {
+        const canvas = canvasRef.current;
         if (canvas) {
             const emitCanvasData = () => {
                 const base64ImageData = canvas.toDataURL('image/png');
@@ -18,7 +18,6 @@ const BoardContainer = () => {
 
             canvas.addEventListener('mouseup', emitCanvasData);
         }
-        const canvas = canvasRef.current;
         if (canvas) {
             canvas.width = canvas.parentElement.offsetWidth;
             canvas.height = canvas.parentElement.offsetHeight;
