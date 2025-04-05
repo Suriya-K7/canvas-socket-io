@@ -48,7 +48,6 @@ const BoardContainer = () => {
             className="size-full ring-1 ring-black rounded-lg w-full h-full"
             width={canvasRef.current.parentElement.offsetWidth}
             height={canvasRef.current.parentElement.offsetHeight}
-
         />
 
     </div>;
