@@ -50,19 +50,19 @@ const BoardContainer = () => {
         return () => controller.abort();
     }, [color, size]);
 
-useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
-    context.lineWidth = size;
-    context.strokeStyle = color;
-}, [color, size]);
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+        context.lineWidth = size;
+        context.strokeStyle = color;
+    }, [color, size]);
 
-return <div className="flex-1 bg-amber-100 p-2">
-    <canvas
-        ref={canvasRef}
-        className="size-full ring-1 ring-black rounded-lg w-full h-full"
-    />
-</div>;
+    return <div className="flex-1 bg-amber-100 p-2 ">
+        <canvas
+            ref={canvasRef}
+            className="size-full ring-1 ring-black rounded-lg w-full h-full"
+        />
+    </div>;
 };
 
 export default BoardContainer;

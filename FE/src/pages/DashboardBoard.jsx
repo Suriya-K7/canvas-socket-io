@@ -3,7 +3,7 @@ import { BoardContainer, ToolBox } from "../components";
 
 const DashboardBoard = () => {
     return (
-        <div className="flex flex-col h-screen gap-1">
+        <div className="flex flex-col h-screen">
             <ToolBox />
             <BoardContainer />
         </div>
