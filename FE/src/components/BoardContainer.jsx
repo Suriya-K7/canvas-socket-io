@@ -1,11 +1,22 @@
 import React, { useRef, useEffect, useContext } from 'react';
+import { io } from 'socket.io-client';
 import DataContext from "../context/DataContext";
 
 const BoardContainer = () => {
     const canvasRef = useRef(null);
     const { color, size } = useContext(DataContext);
 
+    const socket = io('http://localhost:3000'); // Adjust the URL as needed
+
     useEffect(() => {
+        const emitCanvasData = () => {
+            const canvas = canvasRef.current;
+            const base64ImageData = canvas.toDataURL('image/png');
+            socket.emit('canvas-data', base64ImageData);
+            emitCanvasData();
+        };
+
+        canvas.addEventListener('mouseup', emitCanvasData, { signal });
         const canvas = canvasRef.current;
         if (canvas) {
             canvas.width = canvas.parentElement.offsetWidth;
