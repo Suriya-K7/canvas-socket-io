@@ -21,6 +21,7 @@ const BoardContainer = () => {
                 context.drawImage(img, 0, 0);
             };
         });
+        return () => {
             socketRef.current.disconnect();
         };
     }, []);
@@ -39,6 +40,12 @@ const BoardContainer = () => {
             canvas.width = canvas.parentElement.offsetWidth;
             canvas.height = canvas.parentElement.offsetHeight;
         }
+
+        return () => {
+            if (canvas) {
+                canvas.removeEventListener('mouseup', emitCanvasData);
+            }
+        };
     }, []);
 
     useEffect(() => {
