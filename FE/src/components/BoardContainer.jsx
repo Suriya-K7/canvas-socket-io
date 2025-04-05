@@ -26,10 +26,11 @@ const BoardContainer = () => {
             context.lineCap = 'round';
             context.strokeStyle = color;
 
-            context.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+            const rect = canvas.getBoundingClientRect();
+            context.lineTo(e.clientX - rect.left, e.clientY - rect.top);
             context.stroke();
             context.beginPath();
-            context.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+            context.moveTo(e.clientX - rect.left, e.clientY - rect.top);
         };
 
         canvas.addEventListener('mousedown', startDrawing);
@@ -47,8 +48,8 @@ const BoardContainer = () => {
         <canvas
             ref={canvasRef}
             className="size-full ring-1 ring-black rounded-lg w-full h-full"
-            width={800}
-            height={600}
+            width={canvasRef.current.parentElement.offsetWidth}
+            height={canvasRef.current.parentElement.offsetHeight}
 
         />
 
