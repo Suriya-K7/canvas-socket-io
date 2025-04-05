@@ -56,7 +56,6 @@ const BoardContainer = () => {
             width={canvasRef.current.parentElement.offsetWidth}
             height={canvasRef.current.parentElement.offsetHeight}
         />
-
     </div>;
 };
 
