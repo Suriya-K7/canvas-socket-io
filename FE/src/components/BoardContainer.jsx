@@ -6,14 +6,21 @@ const BoardContainer = () => {
     const canvasRef = useRef(null);
     const { color, size } = useContext(DataContext);
 
-    const socket = io('http://localhost:3001');
+    const socketRef = useRef();
+
+    useEffect(() => {
+        socketRef.current = io('http://localhost:3001');
+        return () => {
+            socketRef.current.disconnect();
+        };
+    }, []);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (canvas) {
             const emitCanvasData = () => {
                 const base64ImageData = canvas.toDataURL('image/png');
-                socket.emit('canvas-data', base64ImageData);
+                socketRef.current.emit('canvas-data', base64ImageData);
             };
 
             canvas.addEventListener('mouseup', emitCanvasData);
