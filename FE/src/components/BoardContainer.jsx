@@ -13,41 +13,42 @@ const BoardContainer = () => {
         }
     }, []);
 
-    const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
-    const controller = new AbortController();
-    const { signal } = controller;
-    let drawing = false;
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+        const controller = new AbortController();
+        const { signal } = controller;
+        let drawing = false;
 
-    const startDrawing = (e) => {
-        drawing = true;
-        draw(e);
-    };
+        const startDrawing = (e) => {
+            drawing = true;
+            draw(e);
+        };
 
-    const endDrawing = () => {
-        drawing = false;
-        context.beginPath();
-    };
+        const endDrawing = () => {
+            drawing = false;
+            context.beginPath();
+        };
 
-    const draw = (e) => {
-        if (!drawing) return;
-        context.lineWidth = size;
-        context.lineCap = 'round';
-        context.strokeStyle = color;
+        const draw = (e) => {
+            if (!drawing) return;
+            context.lineWidth = size;
+            context.lineCap = 'round';
+            context.strokeStyle = color;
 
-        const rect = canvas.getBoundingClientRect();
-        context.lineTo(e.clientX - rect.left, e.clientY - rect.top);
-        context.stroke();
-        context.beginPath();
-        context.moveTo(e.clientX - rect.left, e.clientY - rect.top);
-    };
+            const rect = canvas.getBoundingClientRect();
+            context.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            context.stroke();
+            context.beginPath();
+            context.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        };
 
-    canvas.addEventListener('mousedown', startDrawing, { signal });
-    canvas.addEventListener('mouseup', endDrawing, { signal });
-    canvas.addEventListener('mousemove', draw, { signal });
+        canvas.addEventListener('mousedown', startDrawing, { signal });
+        canvas.addEventListener('mouseup', endDrawing, { signal });
+        canvas.addEventListener('mousemove', draw, { signal });
 
-    return () => controller.abort();
-}, []);
+        return () => controller.abort();
+    }, [color, size]);
 
 useEffect(() => {
     const canvas = canvasRef.current;
