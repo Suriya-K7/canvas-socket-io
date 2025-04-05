@@ -40,6 +40,13 @@ const BoardContainer = () => {
         canvas.addEventListener('mousemove', draw, { signal });
 
         return () => controller.abort();
+    }, []);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+        context.lineWidth = size;
+        context.strokeStyle = color;
     }, [color, size]);
 
     return <div className="flex-1 bg-amber-100 p-2">
