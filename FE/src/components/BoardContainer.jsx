@@ -7,6 +7,12 @@ const BoardContainer = () => {
 
     useEffect(() => {
         const canvas = canvasRef.current;
+        if (canvas) {
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+        }
+    }, []);
+        const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
         const controller = new AbortController();
         const { signal } = controller;
@@ -53,8 +59,6 @@ const BoardContainer = () => {
         <canvas
             ref={canvasRef}
             className="size-full ring-1 ring-black rounded-lg w-full h-full"
-            width={canvasRef.current.parentElement.offsetWidth}
-            height={canvasRef.current.parentElement.offsetHeight}
         />
     </div>;
 };
