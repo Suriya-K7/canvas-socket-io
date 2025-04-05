@@ -10,7 +10,17 @@ const BoardContainer = () => {
 
     useEffect(() => {
         socketRef.current = io('http://localhost:3001');
-        return () => {
+        
+        socketRef.current.on('canvas-data', (data) => {
+            const canvas = canvasRef.current;
+            const context = canvas.getContext('2d');
+            const img = new Image();
+            img.src = data;
+            img.onload = () => {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(img, 0, 0);
+            };
+        });
             socketRef.current.disconnect();
         };
     }, []);
