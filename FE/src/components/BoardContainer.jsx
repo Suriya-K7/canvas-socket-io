@@ -9,14 +9,15 @@ const BoardContainer = () => {
     const socket = io('http://localhost:3001');
 
     useEffect(() => {
-        const emitCanvasData = () => {
-            const canvas = canvasRef.current;
-            const base64ImageData = canvas.toDataURL('image/png');
-            socket.emit('canvas-data', base64ImageData);
-            emitCanvasData();
-        };
+        const canvas = canvasRef.current;
+        if (canvas) {
+            const emitCanvasData = () => {
+                const base64ImageData = canvas.toDataURL('image/png');
+                socket.emit('canvas-data', base64ImageData);
+            };
 
-        canvas.addEventListener('mouseup', emitCanvasData, { signal });
+            canvas.addEventListener('mouseup', emitCanvasData);
+        }
         const canvas = canvasRef.current;
         if (canvas) {
             canvas.width = canvas.parentElement.offsetWidth;
