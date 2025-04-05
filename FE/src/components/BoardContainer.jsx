@@ -8,6 +8,8 @@ const BoardContainer = () => {
     useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
+        const controller = new AbortController();
+        const { signal } = controller;
         let drawing = false;
 
         const startDrawing = (e) => {
@@ -33,15 +35,11 @@ const BoardContainer = () => {
             context.moveTo(e.clientX - rect.left, e.clientY - rect.top);
         };
 
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mouseup', endDrawing);
-        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mousedown', startDrawing, { signal });
+        canvas.addEventListener('mouseup', endDrawing, { signal });
+        canvas.addEventListener('mousemove', draw, { signal });
 
-        return () => {
-            canvas.removeEventListener('mousedown', startDrawing);
-            canvas.removeEventListener('mouseup', endDrawing);
-            canvas.removeEventListener('mousemove', draw);
-        };
+        return () => controller.abort();
     }, [color, size]);
 
     return <div className="flex-1 bg-amber-100 p-2">
