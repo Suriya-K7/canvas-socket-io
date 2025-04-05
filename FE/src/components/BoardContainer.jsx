@@ -42,16 +42,17 @@ const BoardContainer = () => {
             canvas.removeEventListener('mousemove', draw);
         };
     }, [color, size]);
-        <div className="flex-1 bg-amber-100 p-2">
-            <canvas
-                ref={canvasRef}
-                className="size-full ring-1 ring-black rounded-lg"
-                width={800}
-                height={600}
-            />
 
-        </div>
-    );
+    return <div className="flex-1 bg-amber-100 p-2">
+        <canvas
+            ref={canvasRef}
+            className="size-full ring-1 ring-black rounded-lg w-full h-full"
+            width={800}
+            height={600}
+
+        />
+
+    </div>;
 };
 
 export default BoardContainer;
