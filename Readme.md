@@ -17,8 +17,8 @@ This is a **full-stack real-time drawing application** where users can log in, d
 
 ## 🚀 Live Demo
 
-- **Frontend (Netlify)**: [Live Link](https://your-netlify-link.com)
-- **Backend (Render)**: [Live Link](https://your-render-link.com)
+- **Frontend (Netlify)**: [Live Link](https://canvas-socket.netlify.app/)
+- **Backend (Render)**: [Live Link](https://canvas-socket-io.onrender.com)
 
 ---
 
@@ -88,7 +88,3 @@ git clone https://github.com/Suriya-K7/canvas-socket-io.git
 - 🎨 **Canvas Drawing**: Users can draw using different brush sizes and colors.
 - 🔄 **Real-Time Sync**: All drawing updates are synchronized live using Socket.IO.
 - 🧑‍🤝‍🧑 **User Presence**: When a user logs in or logs out, all connected users receive a notification in real time.
-
----
-
-Let me know if you'd like a `README.md` file version of this!

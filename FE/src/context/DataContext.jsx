@@ -16,6 +16,11 @@ export const DataProvider = ({ children }) => {
     useEffect(() => {
         let authToken = localStorage.getItem("authToken");
         if (authToken) setToken(authToken);
+        Api.get("/")
+            .then((res) =>
+                console.log(res.data)
+            ).catch((error) =>
+                console.log(error));
     }, []);
 
     const handleLogin = async (email, password) => {
