@@ -37,7 +37,9 @@ export const DataProvider = ({ children }) => {
             setToken(response.data.token);
             setLoggedUser(response.data.user);
             localStorage.setItem("authToken", response.data.token);
-            socketRef.current.emit("loggeduser", response.data.user.name);
+            if (socketRef.current) {
+                socketRef.current.emit("loggeduser", response.data.user.name);
+            }
         } catch (error) {
             console.log(error);
         }
