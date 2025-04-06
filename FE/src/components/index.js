@@ -1,4 +1,4 @@
 import ToolBox from "./ToolBox";
 import BoardContainer from "./BoardContainer";
-
-export { BoardContainer, ToolBox };
+import ModalBox from "./ModalBox";
+export { BoardContainer, ToolBox, ModalBox };

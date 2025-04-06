@@ -2,13 +2,12 @@ import React, { useContext, useEffect } from 'react';
 import { LogoutIcon } from "../assets/icons";
 import DataContext from "../context/DataContext";
 import { io } from 'socket.io-client';
-import { toast } from "react-toastify";
 
 const ToolBox = () => {
     const { color, setColor, size, setSize, handleLogout, socketRef, loggedUser } = useContext(DataContext);
 
     useEffect(() => {
-        socketRef.current = io('http://localhost:3001');
+        socketRef.current = io(import.meta.env.VITE_BEURL);
         if (socketRef.current) {
             socketRef.current.emit("userleft", loggedUser.name);
         }

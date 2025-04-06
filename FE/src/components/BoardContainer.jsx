@@ -8,7 +8,7 @@ const BoardContainer = () => {
     const { color, size, loggedUser, socketRef } = useContext(DataContext);
 
     useEffect(() => {
-        socketRef.current = io('http://localhost:3001');
+        socketRef.current = io(import.meta.env.VITE_BEURL);
 
         socketRef.current.on('canvas-data', (data) => {
             const canvas = canvasRef.current;

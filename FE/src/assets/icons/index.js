@@ -1,3 +1,4 @@
 import LogoutIcon from "./LogoutIcon";
+import LogoIcon from "./LogoIcon";
 
-export { LogoutIcon };
+export { LogoutIcon, LogoIcon };

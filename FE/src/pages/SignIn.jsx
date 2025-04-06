@@ -1,10 +1,13 @@
 import { useContext, useState } from "react";
-import Api from "../api/Api";
 import DataContext from "../context/DataContext";
+import { LogoIcon } from "../assets/icons";
+import ModalBox from "../components/ModalBox";
+import { DEMO_DATA } from "../data/constants";
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [open, setOpen] = useState(false);
 
     const { handleLogin } = useContext(DataContext);
 
@@ -16,11 +19,7 @@ const SignIn = () => {
     return (
         <div className="flex min-h-screen bg-gray-900 flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <img
-                    alt="Your Company"
-                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                    className="mx-auto h-10 w-auto"
-                />
+                <LogoIcon className="text-indigo-500 mx-auto h-10 w-auto" />
                 <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Sign in to your account</h2>
             </div>
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -75,13 +74,20 @@ const SignIn = () => {
                         </button>
                     </div>
                 </form>
-                <p className="mt-10 text-center text-sm/6 text-gray-400">
-                    Not a member?{' '}
-                    <a href="#" className="font-semibold text-indigo-400 hover:text-indigo-300">
-                        Register here
-                    </a>
+                <p className="font-semibold text-indigo-400 hover:text-indigo-300 mt-10 text-center text-sm/6 cursor-pointer"
+                    onClick={() => setOpen(true)}>
+                    Demo Users details
                 </p>
             </div>
+            <ModalBox onClose={() => setOpen(false)} open={open}>
+                {DEMO_DATA.map((item) => (
+                    <div key={item.id} className="flex flex-col gap-1">
+                        <p className="text-sm leading-6">Email: {item.email}</p>
+                        <p className="text-sm leading-6">Password: {item.password}</p>
+                    </div>
+                ))}
+
+            </ModalBox>
         </div>
     );
 };
