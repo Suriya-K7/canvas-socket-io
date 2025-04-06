@@ -28,12 +28,12 @@ const BoardContainer = () => {
 
     useEffect(() => {
         const canvas = canvasRef.current;
-        if (canvas) {
-            const emitCanvasData = () => {
-                const base64ImageData = canvas.toDataURL('image/png');
-                socketRef.current.emit('canvas-data', base64ImageData);
-            };
+        const emitCanvasData = () => {
+            const base64ImageData = canvas.toDataURL('image/png');
+            socketRef.current.emit('canvas-data', base64ImageData);
+        };
 
+        if (canvas) {
             canvas.addEventListener('mouseup', emitCanvasData);
         }
         if (canvas) {
