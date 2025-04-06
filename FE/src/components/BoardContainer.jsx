@@ -1,10 +1,11 @@
 import React, { useRef, useEffect, useContext } from 'react';
 import { io } from 'socket.io-client';
 import DataContext from "../context/DataContext";
+import { toast } from 'react-toastify';
 
 const BoardContainer = () => {
     const canvasRef = useRef(null);
-    const { color, size } = useContext(DataContext);
+    const { color, size, loggedUser } = useContext(DataContext);
 
     const socketRef = useRef();
 
@@ -22,13 +23,20 @@ const BoardContainer = () => {
             };
         });
         socketRef.current.on('loggeduser', (username) => {
-            toast.info(`${username} has joined`);
+            if (username !== loggedUser.name)
+                toast.info(`${username} has joined`);
         });
 
         return () => {
             socketRef.current.disconnect();
         };
     }, []);
+
+    useEffect(() => {
+        if (socketRef.current && loggedUser.name) {
+            socketRef.current.emit("loggeduser", loggedUser.name);
+        }
+    }, [loggedUser]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
