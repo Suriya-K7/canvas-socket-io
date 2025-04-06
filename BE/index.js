@@ -42,6 +42,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("loggeduser", (username) => {
+    socket.username = username; // Store the username on the socket
     io.emit("loggeduser", username);
   });
   socket.on("disconnect", () => {
