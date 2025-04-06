@@ -24,6 +24,8 @@ const BoardContainer = () => {
         socketRef.current.on('loggeduser', (username) => {
             toast.info(`${username} has joined`);
         });
+
+        return () => {
             socketRef.current.disconnect();
         };
     }, []);
