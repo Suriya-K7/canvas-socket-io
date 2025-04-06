@@ -10,7 +10,7 @@ const BoardContainer = () => {
 
     useEffect(() => {
         socketRef.current = io('http://localhost:3001');
-        
+
         socketRef.current.on('canvas-data', (data) => {
             const canvas = canvasRef.current;
             const context = canvas.getContext('2d');

@@ -1,14 +1,16 @@
-import { Button } from "@mui/material";
-import { useState } from 'react';
-import { DashboardBoard } from "./pages";
+import { Route, Routes } from "react-router-dom";
+import { DashboardBoard, SignIn } from "./pages";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
-    <>
-      <DashboardBoard />
-    </>
+    <div className="min-h-screen">
+
+      <Routes>
+        <Route path="/" element={<DashboardBoard />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
+    </div>
   );
 }
 
