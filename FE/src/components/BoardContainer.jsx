@@ -5,9 +5,7 @@ import { toast } from 'react-toastify';
 
 const BoardContainer = () => {
     const canvasRef = useRef(null);
-    const { color, size, loggedUser } = useContext(DataContext);
-
-    const socketRef = useRef();
+    const { color, size, loggedUser, socketRef } = useContext(DataContext);
 
     useEffect(() => {
         socketRef.current = io('http://localhost:3001');

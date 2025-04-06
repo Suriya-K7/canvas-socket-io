@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Api from "../api/Api";
 
@@ -20,7 +20,7 @@ export const DataProvider = ({ children }) => {
 
     const [color, setColor] = useState("#000");
     const [size, setSize] = useState(2);
-
+    const socketRef = useRef(null);
 
     useEffect(() => {
         let authToken = localStorage.getItem("authToken");
@@ -44,9 +44,6 @@ export const DataProvider = ({ children }) => {
 
     const handleLogout = () => {
         localStorage.removeItem("authToken");
-        if (socketRef.current) {
-            socketRef.current.emit("userleft", loggedUser.name);
-        }
         setToken(null);
         setLoggedUser("");
     };
@@ -55,7 +52,7 @@ export const DataProvider = ({ children }) => {
 
     return (
         <DataContext.Provider
-            value={{ color, setColor, size, setSize, handleLogin, handleLogout, token, loggedUser }}
+            value={{ color, setColor, size, setSize, handleLogin, handleLogout, token, loggedUser, socketRef }}
         >
             {children}
         </DataContext.Provider>

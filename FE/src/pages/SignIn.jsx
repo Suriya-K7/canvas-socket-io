@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import Api from "../api/Api";
+import DataContext from "../context/DataContext";
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleLogin = async () => {
+    const { handleLogin } = useContext(DataContext);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleLogin(email, password);
     };
 
     return (
@@ -19,7 +24,7 @@ const SignIn = () => {
                 <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Sign in to your account</h2>
             </div>
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form action="#" method="POST" className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                         <label htmlFor="email" className="block text-sm/6 font-medium text-white">
                             Email address
