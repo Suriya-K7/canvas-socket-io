@@ -44,6 +44,9 @@ export const DataProvider = ({ children }) => {
 
     const handleLogout = () => {
         localStorage.removeItem("authToken");
+        if (socketRef.current) {
+            socketRef.current.emit("userleft", loggedUser.name);
+        }
         setToken(null);
         setLoggedUser("");
     };

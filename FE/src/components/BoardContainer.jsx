@@ -22,6 +22,10 @@ const BoardContainer = () => {
                 context.drawImage(img, 0, 0);
             };
         });
+        socketRef.current.on('userleft', (username) => {
+            toast.info(`${username} has left`);
+        });
+
         socketRef.current.on('loggeduser', (username) => {
             if (username !== loggedUser.name)
                 toast.info(`${username} has joined`);

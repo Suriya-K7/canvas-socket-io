@@ -45,6 +45,9 @@ io.on("connection", (socket) => {
     io.emit("loggeduser", username);
   });
   socket.on("disconnect", () => {
+    if (socket.username) {
+      io.emit("userleft", socket.username);
+    }
     console.log("user disconnected");
   });
 });
