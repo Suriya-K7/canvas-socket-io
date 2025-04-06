@@ -21,7 +21,9 @@ const BoardContainer = () => {
                 context.drawImage(img, 0, 0);
             };
         });
-        return () => {
+        socketRef.current.on('loggeduser', (username) => {
+            toast.info(`${username} has joined`);
+        });
             socketRef.current.disconnect();
         };
     }, []);

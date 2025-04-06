@@ -41,7 +41,9 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("canvas-data", data);
   });
 
-  socket.on("disconnect", () => {
+  socket.on("loggeduser", (username) => {
+    io.emit("loggeduser", username);
+  });
     console.log("user disconnected");
   });
 });
